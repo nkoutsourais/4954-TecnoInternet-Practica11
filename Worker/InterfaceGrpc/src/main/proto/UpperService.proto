@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package es.practica11.interfaces.grpc;
+
+message UpperRequest {
+    string requestString = 1;
+}
+
+message UpperResponse {
+    string responseString = 1;
+}
+
+service UpperService {
+    rpc toUpper(UpperRequest) returns (UpperResponse);
+}

@@ -1,0 +1,23 @@
+Servicio Externo/package-lock.json
+Servidor/package-lock.json
+Cliente/package-lock.json
+
+Servidor/node_modules
+Servicio Externo/node_modules
+Cliente/node_modules
+
+Worker/InterfaceGrpc/target
+Worker/InterfaceGrpc/.settings
+Worker/InterfaceGrpc/.vscode
+
+Worker/Worker/target
+Worker/Worker/.settings
+Worker/Worker/.vscode
+
+.vscode/launch.json
+Servidor/.vscode/launch.json
+Worker/.vscode/launch.json
+
+# Ficheros de ayuda
+Servicio Externo/src/client.js
+Worker/Worker/src/main/java/es/practica11/worker/Producer.java
