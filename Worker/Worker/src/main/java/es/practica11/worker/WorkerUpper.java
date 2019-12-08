@@ -27,7 +27,7 @@ public class WorkerUpper {
 
 	private void process(JSONObject messagObject) throws InterruptedException {
 		String response = callGrpc(messagObject.getString("text"));
-		System.out.println("Response received from server grpc:\n" + response);
+		System.out.println("Response received from server grpc: " + response);
 		processing(messagObject.getString("id"));
 		finish(messagObject.getString("id"), response);
 	}

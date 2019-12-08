@@ -22,3 +22,4 @@ Worker/.vscode/launch.json
 External Service/src/client.js
 Worker/Worker/src/main/java/es/practica11/worker/Producer.java
 .vscode/settings.json
+package-lock.json
