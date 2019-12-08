@@ -8,9 +8,9 @@ var progress;
 amqp.connect(CONN_URL, function (err, conn) {
    conn.createChannel(function (err, channel) {
       ch = channel;
-      channel.consume("updatetask", function(msg) {
-         console.log("%s", msg.content.toString());
-         progress = msg.content.toString();
+      channel.consume("tasksProgress", function(msg) {
+         //console.log("%s", msg.content.toString());
+         progress = JSON.parse(msg.content);
       }, {
             noAck: true
       });
@@ -18,7 +18,8 @@ amqp.connect(CONN_URL, function (err, conn) {
 });
 
 module.exports.publishToQueue = async (taskLaunched) => {
-    ch.sendToQueue("createtask", Buffer.from(taskLaunched.text));
+   var data = { id: taskLaunched.id, text: taskLaunched.text }
+   ch.sendToQueue("newTasks", Buffer.from(JSON.stringify(data)));
 };
 
 module.exports.consumeFromQueue = () => {

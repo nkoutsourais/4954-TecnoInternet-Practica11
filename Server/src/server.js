@@ -5,12 +5,16 @@ var expressWs = require('express-ws')(app);
 const uuidv1 = require('uuid/v1');
 const rabbit = require('./rabbit.js');
 
+console.log('Server running at http://127.0.0.1:8080');
+
 var taskLaunched;
 
 class TaskUpper {
     constructor(id, text) {
       this.id = id;
       this.text = text;
+      this.progress = 0;
+      this.completed = false;
     }
   }
 
@@ -44,9 +48,14 @@ app.ws('/notifications', function (ws, req) {
         console.log('Message received:' + msg);
     });
 
-    setInterval(()=>{
-        ws.send(rabbit.consumeFromQueue());
-    }, 1000);
+    var progressInterval = setInterval(()=>{
+        var data = rabbit.consumeFromQueue();
+        if(data) {
+            ws.send(Buffer.from(JSON.stringify(data)));
+            if(data.completed)
+                clearInterval(progressInterval);
+        }
+    }, 500);
 
 });
 
